@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Transaction"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_transaction_type"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_title">
+
+        <RadioButton
+            android:id="@+id/rb_income"
+            android:layout_width="119dp"
+            android:layout_height="match_parent"
+            android:text="Income" />
+
+        <RadioButton
+            android:id="@+id/rb_expense"
+            android:layout_width="122dp"
+            android:layout_height="match_parent"
+            android:text="Expense" />
+
+        <RadioButton
+            android:id="@+id/rb_transfer"
+            android:layout_width="133dp"
+            android:layout_height="match_parent"
+            android:text="Transfer" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_amount"
+        android:layout_width="386dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Amount"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_transaction_type" />
+
+    <EditText
+        android:id="@+id/et_category"
+        android:layout_width="389dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Category"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_amount" />
+
+    <Button
+        android:id="@+id/btn_add_transaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Transaction"
+        app:layout_constraintTop_toBottomOf="@+id/et_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Additional fields for transfers -->
+    <LinearLayout
+        android:id="@+id/ll_transfer_details"
+        android:layout_width="1dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_category">
+
+        <EditText
+            android:id="@+id/et_from_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From Account"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/et_to_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="To Account"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btn_add_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Add Account" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

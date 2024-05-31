@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/overview_navigation_graph"
+        android:icon="@drawable/overview"
+        android:title="Overview" />
+    <item
+        android:id="@+id/add_navigation_graph"
+        android:icon="@drawable/square_plus"
+        android:title="Add" />
+    <item
+        android:id="@+id/report_navigation_graph"
+        android:icon="@drawable/newspaper"
+        android:title="Reports" />
+</menu>
