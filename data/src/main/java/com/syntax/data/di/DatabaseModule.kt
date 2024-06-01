@@ -3,8 +3,10 @@ package com.syntax.data.di
 import android.content.Context
 import androidx.room.Room
 import com.syntax.data.TransactionRepositoryImpl
+import com.syntax.data.database.dao.AccountDao
 import com.syntax.data.database.dao.TransactionDao
 import com.syntax.data.database.db.AppDatabase
+import com.syntax.data.database.db.AppDatabase.Companion.MIGRATION_1_2
 import com.syntax.domain.repository.TransactionRepository
 import dagger.Module
 import dagger.Provides
@@ -24,13 +26,20 @@ object DatabaseModule {
             appContext,
             AppDatabase::class.java,
             "budget_db"
-        ).build()
+        ).addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides
     @Singleton
     fun provideTransactionDao(db: AppDatabase): TransactionDao {
         return db.transactionDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAccountDao(database: AppDatabase): AccountDao {
+        return database.accountDao()
     }
 
 }

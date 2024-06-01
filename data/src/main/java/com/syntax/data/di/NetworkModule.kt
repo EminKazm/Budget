@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -19,6 +20,16 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl("https://currency-exchange.p.rapidapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        val request = chain.request().newBuilder()
+                            .addHeader("X-RapidAPI-Key", "873bf51c44msh50fdc42ca037cb5p1c484cjsn2a2e96895954")
+                            .addHeader("X-RapidAPI-Host", "currency-exchange.p.rapidapi.com")
+                            .build()
+                        chain.proceed(request)
+                    }.build()
+            )
             .build()
     }
 
@@ -27,4 +38,5 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
+
 }

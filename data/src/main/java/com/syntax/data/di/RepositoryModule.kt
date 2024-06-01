@@ -14,4 +14,6 @@ interface RepositoryModule {
 
     @Binds
     fun bindTransactionRepository(transactionRepositoryImpl: TransactionRepositoryImpl): TransactionRepository
+
+
 }

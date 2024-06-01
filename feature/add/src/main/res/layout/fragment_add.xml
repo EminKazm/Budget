@@ -72,43 +72,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_amount" />
 
+    <!-- Additional fields for transfers -->
+
     <Button
         android:id="@+id/btn_add_transaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Add Transaction"
-        app:layout_constraintTop_toBottomOf="@+id/et_category"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_category" />
 
-    <!-- Additional fields for transfers -->
     <LinearLayout
         android:id="@+id/ll_transfer_details"
-        android:layout_width="1dp"
-        android:layout_height="33dp"
+        android:layout_width="384dp"
+        android:layout_height="257dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_category">
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction">
 
         <EditText
             android:id="@+id/et_from_account"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:hint="From Account"
             android:inputType="text" />
 
         <EditText
             android:id="@+id/et_to_account"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="57dp"
             android:layout_marginTop="8dp"
             android:hint="To Account"
+            android:inputType="text" />
+
+        <AutoCompleteTextView
+            android:id="@+id/et_currency"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="8dp"
+            android:hint="Currency"
             android:inputType="text" />
 
         <Button

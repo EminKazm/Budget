@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import androidx.fragment.app.viewModels
 import com.syntax.domain.entities.Transaction
@@ -55,7 +56,23 @@ class AddFragment : Fragment() {
 
         binding.btnAddAccount.setOnClickListener {
             // Logic to add new account
+            val fromAccount = binding.etFromAccount.text.toString()
+            val toAccount = binding.etToAccount.text.toString()
+            val currency = binding.etCurrency.text.toString()
+
+            viewModel.addAccount(fromAccount, toAccount, currency)
         }
+        viewModel.currencies.observe(viewLifecycleOwner) { currencies ->
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                currencies
+            )
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.etCurrency.setAdapter(adapter)
+        }
+
+        viewModel.fetchCurrencies()
     }
 
     override fun onDestroyView() {
