@@ -20,7 +20,8 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AddViewModel by viewModels()
-
+    private val incomeCategories = listOf("Salary", "Investment")
+    private val expenseCategories = listOf("Shopping", "Entertainment", "Education", "Other")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,14 +35,22 @@ class AddFragment : Fragment() {
 
         binding.rgTransactionType.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.rb_income, R.id.rb_expense -> binding.llTransferDetails.visibility = View.GONE
-                R.id.rb_transfer -> binding.llTransferDetails.visibility = View.VISIBLE
+                    R.id.rb_income -> {
+                        binding.llTransferDetails.visibility = View.GONE
+                        setCategoryAdapter(incomeCategories)
+                    }
+                    R.id.rb_expense -> {
+                        binding.llTransferDetails.visibility = View.GONE
+                        setCategoryAdapter(expenseCategories)
+                    }
+                    R.id.rb_transfer -> binding.llTransferDetails.visibility = View.VISIBLE
+
             }
         }
 
         binding.btnAddTransaction.setOnClickListener {
             val amount = binding.etAmount.text.toString().toDoubleOrNull() ?: 0.0
-            val category = binding.etCategory.text.toString()
+            val category = binding.spinnerCategory.selectedItem.toString()
             val selectedType = view?.findViewById<RadioButton>(binding.rgTransactionType.checkedRadioButtonId)?.text.toString()
 
             val transaction = Transaction(
@@ -54,13 +63,8 @@ class AddFragment : Fragment() {
             viewModel.addTransaction(transaction)
         }
 
-        binding.btnAddAccount.setOnClickListener {
-            // Logic to add new account
-            val fromAccount = binding.etFromAccount.text.toString()
-            val toAccount = binding.etToAccount.text.toString()
-            val currency = binding.etCurrency.text.toString()
+        binding.btnTransfer.setOnClickListener {
 
-            viewModel.addAccount(fromAccount, toAccount, currency)
         }
         viewModel.currencies.observe(viewLifecycleOwner) { currencies ->
             val adapter = ArrayAdapter(
@@ -74,7 +78,11 @@ class AddFragment : Fragment() {
 
         viewModel.fetchCurrencies()
     }
-
+    private fun setCategoryAdapter(categories: List<String>) {
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCategory.adapter = adapter
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

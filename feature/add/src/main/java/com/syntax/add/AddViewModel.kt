@@ -34,11 +34,8 @@ class AddViewModel @Inject constructor(
         }
     }
 
-    fun addAccount(fromAccount: String, toAccount: String, currency: String) {
-        viewModelScope.launch {
-            val account = Account(0, fromAccount, currency)
-            repository.insertAccount(account)
-        }
+    fun addAccount() {
+
     }
 
     fun transferMoney(fromAccount: String, toAccount: String, amount: Double) {
