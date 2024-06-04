@@ -1,5 +1,6 @@
 package com.syntax.overview
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,9 @@ import com.syntax.domain.entities.Transaction
 import com.syntax.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,28 +20,28 @@ import javax.inject.Inject
 class OverviewViewModel @Inject constructor(
     private val repository: TransactionRepository
 ) : ViewModel() {
-    private val _balance = MutableLiveData<Double>()
-    val balance: LiveData<Double> get() = _balance
+    private val _balance = MutableStateFlow<Double>(0.0)
+    val balance: StateFlow<Double> get() = _balance
 
-    private val _income = MutableLiveData<Double>()
-    val income: LiveData<Double> get() = _income
+    private val _income = MutableStateFlow<Double>(0.0)
+    val income: StateFlow<Double> get() = _income
 
-    private val _expense = MutableLiveData<Double>()
-    val expense: LiveData<Double> get() = _expense
-    val transactions: LiveData<List<Transaction>> = repository.getAllTransactions()
-
+    private val _expense = MutableStateFlow<Double>(0.0)
+    val expense: StateFlow<Double> get() = _expense
+    private val _transactions = MutableStateFlow<List<Transaction>>(emptyList())
+    val transactions: StateFlow<List<Transaction>> = _transactions
     init {
-        // Call a function to initialize the data after Hilt has injected the repository
-        initializeData()
-    }
-
-    private fun initializeData() {
-        transactions.observeForever {
-            calculateBalance(it)
+        viewModelScope.launch {
+            repository.getAllTransactions().collect { transactionList ->
+                _transactions.value = transactionList
+                calculateBalance(transactionList)
+            }
         }
     }
 
     private fun calculateBalance(transactions: List<Transaction>) {
+        Log.d("OverviewViewModel", "Transactions updated: $transactions")
+
         val incomeTotal = transactions.filter { it.type == "Income" }.sumOf { it.amount }
         val expenseTotal = transactions.filter { it.type == "Expense" }.sumOf { it.amount }
         _income.value = incomeTotal
