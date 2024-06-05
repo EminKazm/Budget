@@ -7,6 +7,7 @@ import com.syntax.data.database.dao.AccountDao
 import com.syntax.data.database.dao.TransactionDao
 import com.syntax.data.database.db.AppDatabase
 import com.syntax.data.database.db.AppDatabase.Companion.MIGRATION_1_2
+import com.syntax.data.database.db.AppDatabase.Companion.MIGRATION_2_3
 import com.syntax.domain.repository.TransactionRepository
 import dagger.Module
 import dagger.Provides
@@ -26,7 +27,7 @@ object DatabaseModule {
             appContext,
             AppDatabase::class.java,
             "budget_db"
-        ).addMigrations(MIGRATION_1_2)
+        ).addMigrations(MIGRATION_1_2,MIGRATION_2_3 )
             .build()
     }
 

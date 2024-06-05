@@ -41,8 +41,23 @@ class AddViewModel @Inject constructor(
         }
     }
 
-    fun transferMoney(fromAccount: String, toAccount: String, amount: Double) {
-        // Logic for transferring money between accounts
+    fun transferMoney(fromAccount: Account, toAccount: Account, amount: Double) {
+        viewModelScope.launch {
+            try {
+                val exchangeRate = if (fromAccount.currency != toAccount.currency) {
+                    currencyApiService.exchangeCurrency(fromAccount.currency, toAccount.currency, amount)
+                } else {
+                    1.0
+                }
+                val convertedAmount = amount * exchangeRate
+                // Update accounts' balances accordingly
+                repository.updateAccountBalance(fromAccount.name, fromAccount.balance - amount)
+                repository.updateAccountBalance(toAccount.name, toAccount.balance + convertedAmount)
+                loadAccounts()
+            } catch (e: Exception) {
+                // Handle error
+            }
+        }
     }
 
     private fun loadAccounts() {

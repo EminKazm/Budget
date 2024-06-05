@@ -12,6 +12,8 @@ interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: Account)
 
-    @Query("SELECT id,name,currency FROM accounts")
+    @Query("SELECT id,name,currency,balance FROM accounts")
     suspend fun getAllAccountNames(): List<Account>
+    @Query("UPDATE accounts SET balance = :newBalance WHERE name = :accountName")
+    suspend fun updateAccountBalance(accountName: String, newBalance: Double)
 }

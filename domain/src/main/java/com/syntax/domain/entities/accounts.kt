@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Account(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
-    val currency: String = "USD"
+    val currency: String = "USD",
+    val balance: Double = 0.0
 )

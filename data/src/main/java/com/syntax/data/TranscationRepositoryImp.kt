@@ -22,7 +22,9 @@ class TransactionRepositoryImpl @Inject constructor(
 
         transactionDao.insert(transaction)
     }
-
+    override suspend fun updateAccountBalance(accountName: String, newBalance: Double) {
+        accountDao.updateAccountBalance(accountName, newBalance)
+    }
     override suspend fun deleteAllTransactions() {
         transactionDao.deleteAll()
     }

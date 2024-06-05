@@ -11,5 +11,7 @@ interface TransactionRepository {
     suspend fun deleteAllTransactions()
     suspend fun insertAccount(account: Account)
     suspend fun getAllAccountNames(): List<Account>
+    suspend fun updateAccountBalance(accountName: String, newBalance: Double)
+
 
 }
