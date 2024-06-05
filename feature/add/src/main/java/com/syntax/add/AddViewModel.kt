@@ -34,8 +34,11 @@ class AddViewModel @Inject constructor(
         }
     }
 
-    fun addAccount() {
-
+    fun addAccount(account: Account) {
+        viewModelScope.launch {
+            repository.insertAccount(account)
+            loadAccounts()  // Refresh the account list
+        }
     }
 
     fun transferMoney(fromAccount: String, toAccount: String, amount: Double) {

@@ -22,6 +22,10 @@ class TransactionRepositoryImpl @Inject constructor(
 
         transactionDao.insert(transaction)
     }
+
+    override suspend fun deleteAllTransactions() {
+        transactionDao.deleteAll()
+    }
     override suspend fun insertAccount(account: Account) {
         accountDao.insert(account)
     }

@@ -64,7 +64,8 @@ class AddFragment : Fragment() {
         }
 
         binding.btnTransfer.setOnClickListener {
-
+            val dialog = AddDialogFragment()
+            dialog.show(childFragmentManager, "AddAccountDialog")
         }
         viewModel.currencies.observe(viewLifecycleOwner) { currencies ->
             val adapter = ArrayAdapter(

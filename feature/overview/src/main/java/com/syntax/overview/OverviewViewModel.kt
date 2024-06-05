@@ -48,4 +48,13 @@ class OverviewViewModel @Inject constructor(
         _expense.value = expenseTotal
         _balance.value = incomeTotal - expenseTotal
     }
+    fun resetData() {
+        viewModelScope.launch {
+            repository.deleteAllTransactions()
+            _transactions.value = emptyList()
+            _balance.value = 0.0
+            _income.value = 0.0
+            _expense.value = 0.0
+        }
+    }
 }

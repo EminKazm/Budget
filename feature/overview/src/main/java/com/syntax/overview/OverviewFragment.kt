@@ -60,6 +60,9 @@ class OverviewFragment : Fragment() {
                 transactionAdapter.submitList(transactions)
             }
         }
+        binding.btnReset.setOnClickListener {
+            viewModel.resetData()
+        }
 
     }
     override fun onDestroyView() {
