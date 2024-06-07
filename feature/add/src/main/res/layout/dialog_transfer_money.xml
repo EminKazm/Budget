@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Spinner
+        android:id="@+id/sp_from_account"
+        android:layout_width="381dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="16dp" />
+
+    <Spinner
+        android:id="@+id/sp_to_account"
+        android:layout_width="380dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="380dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Amount"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btn_transfer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transfer" />
+</LinearLayout>

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.syntax.domain.entities.Account
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AccountDao {
@@ -12,8 +13,8 @@ interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: Account)
 
-    @Query("SELECT id,name,currency,balance FROM accounts")
-    suspend fun getAllAccountNames(): List<Account>
+    @Query("SELECT * FROM accounts")
+    fun getAllAccountNames(): Flow<List<Account>>
     @Query("UPDATE accounts SET balance = :newBalance WHERE name = :accountName")
     suspend fun updateAccountBalance(accountName: String, newBalance: Double)
 }

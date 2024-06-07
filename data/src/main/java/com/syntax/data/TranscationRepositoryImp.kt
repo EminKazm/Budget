@@ -32,7 +32,7 @@ class TransactionRepositoryImpl @Inject constructor(
         accountDao.insert(account)
     }
 
-    override suspend fun getAllAccountNames(): List<Account> {
+    override  fun getAllAccountNames(): Flow<List<Account>> {
         return accountDao.getAllAccountNames()
     }
 }

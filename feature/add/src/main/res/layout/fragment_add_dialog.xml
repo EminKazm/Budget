@@ -7,14 +7,22 @@
 
     <EditText
         android:id="@+id/et_account_name"
+        android:layout_width="381dp"
+        android:layout_height="64dp"
+        android:hint="Account Name" />
+
+    <EditText
+        android:id="@+id/et_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Account Name" />
+        android:hint="Initial Balance"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="16dp" />
 
     <Spinner
         android:id="@+id/sp_currency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="379dp"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp" />
 
     <Button

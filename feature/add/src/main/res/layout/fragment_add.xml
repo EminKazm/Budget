@@ -85,8 +85,8 @@
 
     <LinearLayout
         android:id="@+id/ll_transfer_details"
-        android:layout_width="384dp"
-        android:layout_height="257dp"
+        android:layout_width="381dp"
+        android:layout_height="270dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -96,7 +96,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction">
-
         <EditText
             android:id="@+id/et_from_account"
             android:layout_width="match_parent"
@@ -119,12 +118,22 @@
             android:layout_marginTop="8dp"
             android:hint="Currency"
             android:inputType="text" />
-
         <Button
-            android:id="@+id/btn_transfer"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_transfer_money"
+            android:layout_width="156dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Transfer money" />
+            android:layout_margin="16dp"
+            android:text="Transfer Money"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_transfer_details" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.syntax.domain.entities.Transaction
 import com.syntax.transfers.R
 import com.syntax.transfers.databinding.FragmentAddBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddFragment : Fragment() {
@@ -63,19 +66,26 @@ class AddFragment : Fragment() {
             viewModel.addTransaction(transaction)
         }
 
-        binding.btnTransfer.setOnClickListener {
+        binding.btnAddAccount.setOnClickListener {
             val dialog = AddDialogFragment()
             dialog.show(childFragmentManager, "AddAccountDialog")
         }
-        viewModel.currencies.observe(viewLifecycleOwner) { currencies ->
-            val adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                currencies
-            )
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.etCurrency.setAdapter(adapter)
+        binding.btnTransferMoney.setOnClickListener {
+            val dialog = TransferMoneyDialog()
+            dialog.show(childFragmentManager, "TransferDialog")
         }
+        viewLifecycleOwner.lifecycleScope.launch{
+          viewModel.currencies.collect{ currencies ->
+              val adapter = ArrayAdapter(
+                  requireContext(),
+                  android.R.layout.simple_spinner_item,
+                  currencies
+              )
+              adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+              binding.etCurrency.setAdapter(adapter)
+          }
+        }
+
 
         viewModel.fetchCurrencies()
     }

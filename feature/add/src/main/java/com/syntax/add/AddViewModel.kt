@@ -9,6 +9,9 @@ import com.syntax.domain.entities.Account
 import com.syntax.domain.entities.Transaction
 import com.syntax.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +21,11 @@ class AddViewModel @Inject constructor(
     private val currencyApiService: ApiService
 
 ) : ViewModel() {
-    private val _accounts = MutableLiveData<List<Account>>()
-    val accounts: LiveData<List<Account>> get() = _accounts
+    val accounts: Flow<List<Account>> = repository.getAllAccountNames()
 
-    private val _currencies = MutableLiveData<List<String>>()
-    val currencies: LiveData<List<String>> get() = _currencies
+    private val _currencies = MutableStateFlow<List<String>>(emptyList())
+    val currencies: StateFlow<List<String>> get() = _currencies
     init {
-        loadAccounts()
         fetchCurrencies()
     }
 
@@ -34,10 +35,11 @@ class AddViewModel @Inject constructor(
         }
     }
 
-    fun addAccount(account: Account) {
+    fun addAccount(accountName: String, currency: String, balance: Double) {
         viewModelScope.launch {
+            val account = Account(name = accountName, currency = currency, balance = balance)
             repository.insertAccount(account)
-            loadAccounts()  // Refresh the account list
+             // Refresh the account list
         }
     }
 
@@ -53,24 +55,19 @@ class AddViewModel @Inject constructor(
                 // Update accounts' balances accordingly
                 repository.updateAccountBalance(fromAccount.name, fromAccount.balance - amount)
                 repository.updateAccountBalance(toAccount.name, toAccount.balance + convertedAmount)
-                loadAccounts()
             } catch (e: Exception) {
                 // Handle error
             }
         }
     }
 
-    private fun loadAccounts() {
-        viewModelScope.launch {
-            _accounts.value = repository.getAllAccountNames()
-        }
-    }
+
 
     fun fetchCurrencies() {
         viewModelScope.launch {
             try {
                 val currencies = currencyApiService.getCurrencies()
-                _currencies.postValue(currencies)
+                _currencies.value = currencies
             } catch (e: Exception) {
                 // Handle error case
             }
