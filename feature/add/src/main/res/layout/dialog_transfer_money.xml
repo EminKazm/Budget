@@ -29,9 +29,10 @@
         android:hint="Amount"
         android:inputType="numberDecimal" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_transfer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/CustomButton"
         android:text="Transfer" />
 </LinearLayout>

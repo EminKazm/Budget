@@ -34,6 +34,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:padding="8dp"
+            style="@style/CustomRadioButton"
             android:text="Income" />
 
         <RadioButton
@@ -42,6 +43,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:padding="8dp"
+            style="@style/CustomRadioButton"
             android:text="Expense" />
 
         <RadioButton
@@ -50,6 +52,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:padding="8dp"
+            style="@style/CustomRadioButton"
             android:text="Transfer" />
     </RadioGroup>
 
@@ -79,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_amount" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_transaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_transfer_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

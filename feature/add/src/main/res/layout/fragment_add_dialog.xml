@@ -29,7 +29,7 @@
         android:layout_height="58dp"
         android:layout_marginTop="16dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
