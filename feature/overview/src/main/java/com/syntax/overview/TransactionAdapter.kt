@@ -9,7 +9,7 @@ import com.syntax.domain.entities.Transaction
 import com.syntax.income.databinding.ItemTransactionBinding
 
 class TransactionAdapter(private val onDeleteClick: (Transaction) -> Unit) : ListAdapter<Transaction, TransactionAdapter.TransactionViewHolder>(TransactionDiffCallback()) {
-
+//
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
         val binding = ItemTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TransactionViewHolder(binding)
