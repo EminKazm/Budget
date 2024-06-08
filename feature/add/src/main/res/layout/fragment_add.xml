@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/tv_add_title"
@@ -15,12 +16,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <RadioGroup
         android:id="@+id/rg_transaction_type"
-        android:layout_width="374dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,48 +30,54 @@
 
         <RadioButton
             android:id="@+id/rb_income"
-            android:layout_width="119dp"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:padding="8dp"
             android:text="Income" />
 
         <RadioButton
             android:id="@+id/rb_expense"
-            android:layout_width="122dp"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:padding="8dp"
             android:text="Expense" />
 
         <RadioButton
             android:id="@+id/rb_transfer"
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:padding="8dp"
             android:text="Transfer" />
     </RadioGroup>
 
     <EditText
         android:id="@+id/et_amount"
-        android:layout_width="386dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="10dp"
         android:hint="Amount"
+        style="@style/CustomEditText"
         android:inputType="numberDecimal"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rg_transaction_type" />
 
     <Spinner
         android:id="@+id/spinner_category"
-        android:layout_width="399dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:layout_marginHorizontal="10dp"
+        style="@style/CustomSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_amount" />
-
-    <!-- Additional fields for transfers -->
 
     <Button
         android:id="@+id/btn_add_transaction"
@@ -78,62 +85,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Add Transaction"
+        style="@style/CustomButton"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
 
-    <LinearLayout
-        android:id="@+id/ll_transfer_details"
-        android:layout_width="381dp"
-        android:layout_height="270dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction">
-        <EditText
-            android:id="@+id/et_from_account"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:hint="From Account"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/et_to_account"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_marginTop="8dp"
-            android:hint="To Account"
-            android:inputType="text" />
-
-        <AutoCompleteTextView
-            android:id="@+id/et_currency"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="8dp"
-            android:hint="Currency"
-            android:inputType="text" />
-        <Button
-            android:id="@+id/btn_transfer_money"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Transfer Money"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_add_account"
+        android:id="@+id/btn_transfer_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add account"
+        android:layout_gravity="center_horizontal"
+        android:text="Transfer Money"
+        style="@style/CustomButton"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="240dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_account"
+        style="@style/CustomButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Add Account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_transfer_details" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_transfer_money"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

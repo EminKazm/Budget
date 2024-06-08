@@ -39,7 +39,6 @@ class AddViewModel @Inject constructor(
         viewModelScope.launch {
             val account = Account(name = accountName, currency = currency, balance = balance)
             repository.insertAccount(account)
-             // Refresh the account list
         }
     }
 

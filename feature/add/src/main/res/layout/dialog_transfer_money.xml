@@ -3,23 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background">
 
     <Spinner
         android:id="@+id/sp_from_account"
-        android:layout_width="381dp"
+        style="@style/CustomSpinner"
+        android:layout_width="266dp"
         android:layout_height="51dp"
         android:layout_marginBottom="16dp" />
 
     <Spinner
         android:id="@+id/sp_to_account"
-        android:layout_width="380dp"
+        style="@style/CustomSpinner"
+        android:layout_width="266dp"
         android:layout_height="55dp"
         android:layout_marginBottom="16dp" />
 
     <EditText
         android:id="@+id/amount"
-        android:layout_width="380dp"
+        style="@style/CustomEditText"
+        android:layout_width="264dp"
         android:layout_height="59dp"
         android:layout_marginBottom="16dp"
         android:hint="Amount"

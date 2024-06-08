@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.syntax.domain.entities.Transaction
 import com.syntax.income.R
 import com.syntax.income.databinding.FragmentOverviewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +34,7 @@ class OverviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         transactionAdapter = TransactionAdapter{
-            transaction->viewModel.deleteTransaction(transaction)
+            transaction->showDeleteDialog(transaction)
         }
 
         binding.rvTransactions.apply {
@@ -70,5 +72,19 @@ class OverviewFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun showDeleteDialog(transaction: Transaction) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete Transaction")
+            .setMessage("Are you sure you want to delete this transaction?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                viewModel.deleteTransaction(transaction)
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 }

@@ -39,14 +39,26 @@ class AddFragment : Fragment() {
         binding.rgTransactionType.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                     R.id.rb_income -> {
-                        binding.llTransferDetails.visibility = View.GONE
+                        binding.btnTransferMoney.visibility = View.GONE
+                        binding.etAmount.visibility = View.VISIBLE
+                        binding.spinnerCategory.visibility = View.VISIBLE
+                        binding.btnAddTransaction.visibility = View.VISIBLE
                         setCategoryAdapter(incomeCategories)
                     }
                     R.id.rb_expense -> {
-                        binding.llTransferDetails.visibility = View.GONE
+                        binding.btnTransferMoney.visibility = View.GONE
+                        binding.etAmount.visibility = View.VISIBLE
+                        binding.spinnerCategory.visibility = View.VISIBLE
+                        binding.btnAddTransaction.visibility = View.VISIBLE
                         setCategoryAdapter(expenseCategories)
                     }
-                    R.id.rb_transfer -> binding.llTransferDetails.visibility = View.VISIBLE
+                    R.id.rb_transfer -> {
+                        binding.btnTransferMoney.visibility = View.VISIBLE
+                        binding.etAmount.visibility = View.GONE
+                        binding.spinnerCategory.visibility = View.GONE
+                        binding.btnAddTransaction.visibility = View.GONE
+
+                    }
 
             }
         }
@@ -82,7 +94,6 @@ class AddFragment : Fragment() {
                   currencies
               )
               adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-              binding.etCurrency.setAdapter(adapter)
           }
         }
 
