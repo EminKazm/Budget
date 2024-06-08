@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="6dp"
+    android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="8dp"
     android:background="@drawable/rounded_edittext_bg">
 
@@ -11,36 +11,34 @@
         android:id="@+id/tvAccountName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginTop="8dp"
         android:text="Account Name"
-        android:padding="4dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@id/tvAccountBalance"
+        android:textSize="16sp"
+        android:layout_margin="8dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvAccountBalance"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvAccountBalance"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="2dp"
-        android:layout_marginTop="8dp"
         android:text="Account Balance"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:layout_margin="8dp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/ic_delete"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ic_delete"
-        android:layout_width="40dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/trash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccountBalance"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/trash" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

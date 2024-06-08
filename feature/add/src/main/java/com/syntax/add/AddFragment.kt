@@ -43,6 +43,7 @@ class AddFragment : Fragment() {
                         binding.etAmount.visibility = View.VISIBLE
                         binding.spinnerCategory.visibility = View.VISIBLE
                         binding.btnAddTransaction.visibility = View.VISIBLE
+                        binding.btnAddAccount.visibility = View.GONE
                         setCategoryAdapter(incomeCategories)
                     }
                     R.id.rb_expense -> {
@@ -50,6 +51,7 @@ class AddFragment : Fragment() {
                         binding.etAmount.visibility = View.VISIBLE
                         binding.spinnerCategory.visibility = View.VISIBLE
                         binding.btnAddTransaction.visibility = View.VISIBLE
+                        binding.btnAddAccount.visibility = View.GONE
                         setCategoryAdapter(expenseCategories)
                     }
                     R.id.rb_transfer -> {
@@ -57,7 +59,16 @@ class AddFragment : Fragment() {
                         binding.etAmount.visibility = View.GONE
                         binding.spinnerCategory.visibility = View.GONE
                         binding.btnAddTransaction.visibility = View.GONE
+                        binding.btnAddAccount.visibility = View.GONE
 
+
+                    }
+                    R.id.rb_add->{
+                        binding.btnTransferMoney.visibility = View.GONE
+                        binding.etAmount.visibility = View.GONE
+                        binding.spinnerCategory.visibility = View.GONE
+                        binding.btnAddTransaction.visibility = View.GONE
+                        binding.btnAddAccount.visibility = View.VISIBLE
                     }
 
             }

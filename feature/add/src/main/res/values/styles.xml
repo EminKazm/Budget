@@ -2,12 +2,13 @@
 <resources>
     <style name="CustomButton">
         <item name="android:background">@drawable/button_selector</item>
-        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingRight">12dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="CustomEditText">

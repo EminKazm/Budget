@@ -34,9 +34,7 @@ class ReportsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        accountAdapter = AccountAdapter{
-            account->showDeleteDialog(account)
-        }
+        accountAdapter = AccountAdapter { account -> showDeleteDialog(account) }
 
         binding.rvAccounts.apply {
             layoutManager = LinearLayoutManager(context)
@@ -51,7 +49,19 @@ class ReportsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.totalBalanceInUSD.collect { totalBalance ->
-                binding.tvTotalBalanceInUSD.text = "$${totalBalance}"
+                binding.tvTotalBalanceInUSD.text = "Net worth in USD: $${totalBalance}"
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.incomeReport.collect { totalIncome ->
+                binding.tvIncomeReport.text = "Total Income: $${totalIncome}"
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.outcomeReport.collect { totalOutcome ->
+                binding.tvOutcomeReport.text = "Total Outcome: $${totalOutcome}"
             }
         }
     }
@@ -60,6 +70,7 @@ class ReportsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
     private fun showDeleteDialog(account: Account) {
         AlertDialog.Builder(requireContext())
             .setTitle("Delete Account")

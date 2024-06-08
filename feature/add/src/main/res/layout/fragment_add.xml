@@ -33,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:padding="8dp"
             style="@style/CustomRadioButton"
             android:text="Income" />
@@ -43,6 +44,7 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:padding="8dp"
+            android:textAlignment="center"
             style="@style/CustomRadioButton"
             android:text="Expense" />
 
@@ -52,18 +54,29 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:padding="8dp"
+            android:textAlignment="center"
             style="@style/CustomRadioButton"
             android:text="Transfer" />
+        <RadioButton
+            android:id="@+id/rb_add"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textAlignment="center"
+            style="@style/CustomRadioButton"
+            android:text="Add"
+            />
     </RadioGroup>
 
     <EditText
         android:id="@+id/et_amount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="10dp"
-        android:hint="Amount"
         style="@style/CustomEditText"
+        android:layout_width="393dp"
+        android:layout_height="51dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="16dp"
+        android:hint="Amount"
         android:inputType="numberDecimal"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,23 +85,24 @@
 
     <Spinner
         android:id="@+id/spinner_category"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/CustomSpinner"
+        android:layout_width="394dp"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="16dp"
         android:visibility="gone"
-        android:layout_marginHorizontal="10dp"
-        style="@style/CustomSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_amount" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_transaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Add Transaction"
         style="@style/CustomButton"
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:text="Add"
+        android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,17 +111,16 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_transfer_money"
+        style="@style/CustomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
         android:text="Transfer Money"
-        style="@style/CustomButton"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="240dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_account"
@@ -116,8 +129,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Add Account"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_transfer_money"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_transfer_money" />
 </androidx.constraintlayout.widget.ConstraintLayout>

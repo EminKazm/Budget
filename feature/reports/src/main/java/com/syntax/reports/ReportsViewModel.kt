@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.syntax.data.api.ApiService
 import com.syntax.domain.entities.Account
+import com.syntax.domain.entities.Transaction
 import com.syntax.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,16 +24,26 @@ class ReportsViewModel @Inject constructor(
     private val _totalBalanceInUSD = MutableStateFlow(0.0)
     val totalBalanceInUSD: StateFlow<Double> = _totalBalanceInUSD
 
+    private val _incomeReport = MutableStateFlow(0.0)
+    val incomeReport: StateFlow<Double> = _incomeReport
+
+    private val _outcomeReport = MutableStateFlow(0.0)
+    val outcomeReport: StateFlow<Double> = _outcomeReport
 
     init {
-        loadAccountsReport()
+        loadReports()
     }
 
-    private fun loadAccountsReport() {
+    private fun loadReports() {
         viewModelScope.launch {
             repository.getAllAccountNames().collect { accounts ->
                 _accountsReport.value = accounts
                 calculateTotalBalanceInUSD(accounts)
+            }
+        }
+        viewModelScope.launch {
+            repository.getAllTransactions().collect { transactions ->
+                calculateIncomeOutcome(transactions)
             }
         }
     }
@@ -51,10 +62,19 @@ class ReportsViewModel @Inject constructor(
                 _totalBalanceInUSD.value = totalBalance
             } catch (e: Exception) {
                 // Handle error
+                _totalBalanceInUSD.value = 0.0
             }
         }
     }
-     fun deleteAccount(account: Account){
+
+    private fun calculateIncomeOutcome(transactions: List<Transaction>) {
+        val income = transactions.filter { it.type == "Income" }.sumOf { it.amount }
+        val outcome = transactions.filter { it.type == "Expense" }.sumOf { it.amount }
+        _incomeReport.value = income
+        _outcomeReport.value = outcome
+    }
+
+    fun deleteAccount(account: Account) {
         viewModelScope.launch {
             repository.deleteAccount(account)
         }

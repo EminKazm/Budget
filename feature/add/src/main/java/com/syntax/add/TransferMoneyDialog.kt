@@ -65,7 +65,13 @@ class TransferMoneyDialog : BottomSheetDialogFragment() {
                     val toAccount = accounts.find { it.name == toAccountName }
 
                     if (fromAccount != null && toAccount != null) {
-                        viewModel.transferMoney(fromAccount, toAccount, amount)
+                        val exchangeRate = if (fromAccount.currency != toAccount.currency) {
+                            viewModel.getExchangeRate(fromAccount.currency, toAccount.currency)
+                        } else {
+                            1.0
+                        }
+                        val convertedAmount = amount * exchangeRate
+                        viewModel.transferMoney(fromAccount, toAccount, amount, convertedAmount)
                         dismiss()
                     }
                 }
