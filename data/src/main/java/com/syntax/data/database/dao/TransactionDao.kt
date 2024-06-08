@@ -2,6 +2,7 @@ package com.syntax.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -16,6 +17,8 @@ interface TransactionDao {
 
     @Query("SELECT * FROM transaction_table")
     fun getAllTransactions(): Flow<List<Transaction>>
+    @Delete
+    suspend fun deleteTransaction(transaction: Transaction)
     @Query("DELETE FROM transaction_table")
     suspend fun deleteAll()
 

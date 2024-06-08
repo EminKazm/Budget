@@ -31,7 +31,9 @@ class ReportsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        accountAdapter = AccountAdapter()
+        accountAdapter = AccountAdapter{
+            account->viewModel.deleteAccount(account)
+        }
 
         binding.rvAccounts.apply {
             layoutManager = LinearLayoutManager(context)

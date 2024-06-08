@@ -54,4 +54,9 @@ class ReportsViewModel @Inject constructor(
             }
         }
     }
+     fun deleteAccount(account: Account){
+        viewModelScope.launch {
+            repository.deleteAccount(account)
+        }
+    }
 }

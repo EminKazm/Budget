@@ -32,6 +32,12 @@ class TransactionRepositoryImpl @Inject constructor(
         accountDao.insert(account)
     }
 
+    override suspend fun deleteTransaction(transaction: Transaction) {
+        transactionDao.deleteTransaction(transaction)
+    }
+    override suspend fun deleteAccount(account: Account) {
+        accountDao.deleteAccount(account)
+    }
     override  fun getAllAccountNames(): Flow<List<Account>> {
         return accountDao.getAllAccountNames()
     }

@@ -31,6 +31,9 @@ class OverviewViewModel @Inject constructor(
     private val _transactions = MutableStateFlow<List<Transaction>>(emptyList())
     val transactions: StateFlow<List<Transaction>> = _transactions
     init {
+        loadTransactions()
+    }
+    private fun loadTransactions(){
         viewModelScope.launch {
             repository.getAllTransactions().collect { transactionList ->
                 _transactions.value = transactionList
@@ -38,7 +41,6 @@ class OverviewViewModel @Inject constructor(
             }
         }
     }
-
     private fun calculateBalance(transactions: List<Transaction>) {
         Log.d("OverviewViewModel", "Transactions updated: $transactions")
 
@@ -55,6 +57,12 @@ class OverviewViewModel @Inject constructor(
             _balance.value = 0.0
             _income.value = 0.0
             _expense.value = 0.0
+        }
+    }
+    fun deleteTransaction(transactions: Transaction){
+        viewModelScope.launch {
+            repository.deleteTransaction(transactions)
+            loadTransactions()
         }
     }
 }

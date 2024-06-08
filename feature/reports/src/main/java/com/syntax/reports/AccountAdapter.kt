@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.syntax.domain.entities.Account
+import com.syntax.domain.entities.Transaction
 import com.syntax.reports.databinding.ItemAccountBinding
 
-class AccountAdapter : ListAdapter<Account, AccountAdapter.AccountViewHolder>(AccountDiffCallback()) {
+class AccountAdapter(private val onDeleteClick: (Account) -> Unit) : ListAdapter<Account, AccountAdapter.AccountViewHolder>(AccountDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder {
         val binding = ItemAccountBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,6 +25,7 @@ class AccountAdapter : ListAdapter<Account, AccountAdapter.AccountViewHolder>(Ac
         fun bind(account: Account) {
             binding.tvAccountName.text = account.name
             binding.tvAccountBalance.text = "${account.balance} ${account.currency}"
+            binding.icDelete.setOnClickListener { onDeleteClick(account) }
         }
     }
 

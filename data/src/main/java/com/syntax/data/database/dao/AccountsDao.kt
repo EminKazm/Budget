@@ -1,6 +1,7 @@
 package com.syntax.data.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,6 +16,8 @@ interface AccountDao {
 
     @Query("SELECT * FROM accounts")
     fun getAllAccountNames(): Flow<List<Account>>
+    @Delete
+    suspend fun deleteAccount(account: Account)
     @Query("UPDATE accounts SET balance = :newBalance WHERE name = :accountName")
     suspend fun updateAccountBalance(accountName: String, newBalance: Double)
 }

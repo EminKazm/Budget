@@ -31,7 +31,9 @@ class OverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transactionAdapter = TransactionAdapter()
+        transactionAdapter = TransactionAdapter{
+            transaction->viewModel.deleteTransaction(transaction)
+        }
 
         binding.rvTransactions.apply {
             layoutManager = LinearLayoutManager(context)
