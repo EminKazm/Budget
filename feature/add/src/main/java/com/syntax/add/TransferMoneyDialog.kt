@@ -15,6 +15,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.syntax.transfers.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +27,10 @@ class TransferMoneyDialog : BottomSheetDialogFragment() {
 
     private val viewModel: AddViewModel by viewModels()
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.dialog_transfer_money, null as ViewGroup?)
 
@@ -67,11 +71,27 @@ class TransferMoneyDialog : BottomSheetDialogFragment() {
                 }
             }
         }
+        return view
 
-        return Dialog(requireContext()).apply {
-            setContentView(view)
-            setTitle("Transfer Money")
-        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Get the bottom sheet view
+        val bottomSheet = dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+
+        // Get the behavior of the bottom sheet
+        val behavior = bottomSheet?.let { BottomSheetBehavior.from(it) }
+
+        // Set the peek height to half of the screen height
+        val screenHeight = requireContext().resources.displayMetrics.heightPixels
+        behavior?.peekHeight = screenHeight / 2
+
+        dialog?.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
     }
 
 }
