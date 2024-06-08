@@ -24,7 +24,6 @@ abstract class AppDatabase : RoomDatabase() {
         }
         val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                // Add the new 'balance' column with a default value of 0.0
                 database.execSQL("ALTER TABLE accounts ADD COLUMN balance REAL NOT NULL DEFAULT 0.0")
             }
         }

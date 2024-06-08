@@ -80,7 +80,7 @@ class AddFragment : Fragment() {
             val selectedType = view?.findViewById<RadioButton>(binding.rgTransactionType.checkedRadioButtonId)?.text.toString()
 
             val transaction = Transaction(
-                id = 0, // Auto-generate ID
+                id = 0,
                 amount = amount,
                 category = category,
                 type = selectedType

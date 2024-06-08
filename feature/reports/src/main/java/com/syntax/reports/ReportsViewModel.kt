@@ -61,7 +61,6 @@ class ReportsViewModel @Inject constructor(
                 }
                 _totalBalanceInUSD.value = totalBalance
             } catch (e: Exception) {
-                // Handle error
                 _totalBalanceInUSD.value = 0.0
             }
         }

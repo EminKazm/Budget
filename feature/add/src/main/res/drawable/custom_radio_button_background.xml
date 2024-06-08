@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Checked state -->
     <item android:state_checked="true">
         <shape android:shape="rectangle">
             <solid android:color="#1976D2" /> <!-- Blue 700 -->
@@ -8,7 +7,6 @@
             <stroke android:width="2dp" android:color="#0D47A1" /> <!-- Blue 900 -->
         </shape>
     </item>
-    <!-- Unchecked state -->
     <item android:state_checked="false">
         <shape android:shape="rectangle">
             <solid android:color="#B0BEC5" /> <!-- Blue Gray 200 -->

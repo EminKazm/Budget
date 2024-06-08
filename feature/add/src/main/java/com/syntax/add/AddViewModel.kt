@@ -46,7 +46,6 @@ class AddViewModel @Inject constructor(
         return try {
             currencyApiService.exchangeCurrency(fromCurrency, toCurrency, 1.0)
         } catch (e: Exception) {
-            // Handle error
             1.0
         }
     }
